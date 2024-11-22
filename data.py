@@ -1,5 +1,4 @@
 import csv
-import matplotlib.pyplot as plt
 
 def read_csv_with_multiple_tables(file_path):
     with open(file_path, mode='r', newline='') as file:
@@ -38,20 +37,10 @@ def print_tables(tables):
             print(f"Colonne {i+1}: {column}")
 
 # Chemin absolu du fichier CSV
-file_path = r'C:\Users\Redouane\OneDrive\Bureau\notesTP\codeTP\tablo.csv'
+file_path = r'tablo.csv'
 
 # Lire le fichier CSV et obtenir les tableaux
 tables = read_csv_with_multiple_tables(file_path)
 
 # Convertir les colonnes en listes de nombres
 converted_tables = convert_columns_to_lists(tables)
-
-# Afficher les tableaux convertis
-#Graphique bruit de fond avec signal seuil = -20mV:
-x,y = converted_tables['Tableau seuil = -20mV']
-plt.plot(x,y,'-x')
-plt.xlabel("temps en secondes")
-plt.ylabel("nombre de coup")
-plt.title("Bruit du détecteur au seuil -20mV")
-plt.show()
-
