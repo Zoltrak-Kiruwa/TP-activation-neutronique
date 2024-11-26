@@ -21,8 +21,8 @@ def f(x,a,b,c):
 
 def Chi2(a,b,c):
     chi2 = 0
-    for i in range(0,len(x)):
-        chi2 += math.pow(Y_[i]-f(x[i],a,b,c),2)/math.pow(np.std(Y_),2)
+    for i in range(40,len(x)):
+        chi2 += math.pow(Y_[i]-f(x[i],a,b,c),2)/math.pow(np.sqrt(Y_[i]),2)
 
     return chi2
 
@@ -62,8 +62,8 @@ print(Y_)
 
 minimizer = Minuit(Chi2, a=686.23287508, b=3e-3, c=0)
 minimizer.limits["a"] = (0,1000)
-minimizer.limits["b"] = (0,0.009)
-minimizer.limits["c"] = (0,100)
+minimizer.limits["b"] = (0,0.1)
+minimizer.limits["c"] = (0,0)
 minimizer.migrad()
 a_fit = minimizer.values['a']
 b_fit = minimizer.values['b']
