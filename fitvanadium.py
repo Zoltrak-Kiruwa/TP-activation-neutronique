@@ -23,9 +23,8 @@ def f(x,a,b,c):
 
 def Chi2(a,b,c):
     chi2 = 0
-    for i in range(len(x)):
+    for i in range(30,len(x)):
         chi2 += math.pow(y[i]-f(x[i],a,b,c),2)/math.pow(Yerr[i],2)
-    if chi2 <= 60 or chi2 >=45:
         print("chi2 = ", chi2)
         return chi2
 

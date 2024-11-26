@@ -1,0 +1,9 @@
+le fit du vanadium n'est pas le bon, non pas parceque la méthode est mauvaise, mais c'est parce que le bins width est trop court.
+Au début du plot des donnée il y a une très grande variation du nombre de coup par classe (bins witdth = 5sec) on a accès à moin d'information sur
+ce qui se passe physiquement avec des classes large. Un choix de largeur de classe plus petit nous aurait donné accès à plus d'informations
+car on aurait eu plus de données (ici on a une liste contenant 107 valeurs de coups). En coupant le signal en deux entre 0 et 50 iterations On a des valeurs de fit pour lambda autour de 9e-3 et 10e-3/s 
+soit trois fois plus grande que la valeur attendu (lambda attendu = 2.88e-3/s).
+On observe que le fit esr meilleur à partir d'un certains temps en coupant les valeurs à partir de 50 iteration
+car il y a peu de variations entre les points. Il reste quand même 2 fois plus grand que la valeur attendue pour lambda (lambda attendu = 2.88e-3/s contre 5.77e-3/s).
+
+Conclusion : Réduire le bins width.
