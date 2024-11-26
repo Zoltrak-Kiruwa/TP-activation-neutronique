@@ -95,12 +95,12 @@ for element in x:
     
 #fit Argent 110
 curve_diff = np.array([])
-for i in range(0,30):
+for i in range(0,len(x)):
     curve_diff = np.append(curve_diff,Y_[i]-y_fit[i])
     
 yl = curve_diff
 
-a_fit1,b_fit1,c_fit1,Minimizer1,arg1 = find_best_lambda(200,0.1,0,0,30,30)
+a_fit1,b_fit1,c_fit1,Minimizer1,arg1 = find_best_lambda(200,0.1,0,0,1,30)
 print("Argent 110 :",Minimizer1)
 print("\n")
 
