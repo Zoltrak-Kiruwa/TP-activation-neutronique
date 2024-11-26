@@ -49,7 +49,7 @@ for element in x:
 plt.matplotlib.pyplot.errorbar(x, y, yerr = Yerr, xerr=None, fmt='r.')
 plt.xlabel("temps en secondes")
 plt.ylabel("nombre de coup")
-plt.title("activité du vanadium")
+plt.title("activité du Cuivre")
 
 plt.plot(x,y_fit)
 plt.show()

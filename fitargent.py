@@ -51,7 +51,23 @@ for element in x:
 plt.matplotlib.pyplot.errorbar(x, y, yerr = Yerr, xerr=None, fmt='r.')
 plt.xlabel("temps en secondes")
 plt.ylabel("nombre de coup")
-plt.title("activité du vanadium")
+plt.title("activité de l'argent")
 
 plt.plot(x,y_fit)
 plt.show()
+
+"""
+demi_vie = np.round(np.sum(y)/2)
+def temps_demi_vie(demi_vie,x,y_fit):
+
+    count = 0
+    for i in range(len(x)):
+        count+=y[i]
+        
+        if count>=demi_vie:
+            return x[i],count
+    return "NONE","NONE"
+
+time,count = temps_demi_vie(demi_vie,x,y)
+
+print("temps =",time,"nombre d'éléments = ",count)"""
