@@ -100,7 +100,7 @@ for i in range(0,len(x)):
     
 yl = curve_diff
 
-a_fit1,b_fit1,c_fit1,Minimizer1,arg1 = find_best_lambda(200,0.1,0,0,1,30)
+a_fit1,b_fit1,c_fit1,Minimizer1,arg1 = find_best_lambda(200,0.1,0,0,1,len(x))
 print("Argent 110 :",Minimizer1)
 print("\n")
 
