@@ -45,7 +45,6 @@ def f(x,a,b,c):
 def Chi2(a,b,c,k,end):
     chi2 = 0
     for i in range(int(k),int(end)):
-        
         chi2 += math.pow(yl[i]-f(x[i],a,b,c),2)/math.pow(np.sqrt(yl[i]),2)
 
     return chi2
@@ -62,7 +61,7 @@ def find_best_lambda(a_,b_,c_,start,finish,endfit):
         
         minimizer = Minuit(Chi2,a=a_,b=b_,c=c_,k=i,end=endfit)
         minimizer.limits["a"] = (0,1000)
-        minimizer.limits["b"] = (0,0.01)
+        minimizer.limits["b"] = (0,1)
         minimizer.limits["c"] = (0,0)
         minimizer.fixed["k"] = True
         minimizer.fixed["end"] = True
@@ -96,7 +95,7 @@ for element in x:
 #fit Argent 110
 curve_diff = np.array([])
 for i in range(0,len(x)):
-    curve_diff = np.append(curve_diff,Y_[i]-y_fit[i])
+    curve_diff = np.append(curve_diff,np.abs(Y_[i]-y_fit[i]))
     
 yl = curve_diff
 
@@ -119,7 +118,7 @@ plt.plot(x,Y_,'r.')
 plt.xlabel("temps en secondes")
 plt.ylabel("nombre de coup")
 plt.title("activité de l'argent")
-plt.plot(x,y_fit,'b-',label = "fit sur les données"+r" $\lambda$"+" = "+str(b_fit))
+plt.plot(x,y_fit,'b-',label = "fit sur les données de l'argent"+r" $\lambda$"+" = "+str(b_fit))
 plt.plot(x,y_fit1,'y-',label ="reconstruction de l'activité de l'argent 110 et fit des points obtenue"+r" $\lambda$"+" = "+str(b_fit1))
 plt.plot(x,reverse,color = "purple",label="addition des courbe fitté bleur et jaune pour reconstruire le signal")
 plt.legend(fontsize='5')
