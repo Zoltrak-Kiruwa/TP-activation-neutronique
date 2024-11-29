@@ -18,13 +18,13 @@ y = np.array(y)
 Yerr = np.sqrt(y)
 sigma = np.std(y)
 
-def f(x,a,b,c):
-    return (a)*np.exp(-b*x)+c
+def f(x,a,b):
+    return (a)*np.exp(-b*x)
 
-def Chi2(a,b,c):
+def Chi2(a,b):
     chi2 = 0
-    for i in range(30,len(x)):
-        chi2 += math.pow(y[i]-f(x[i],a,b,c),2)/math.pow(Yerr[i],2)
+    for i in range(0,len(x)):
+        chi2 += math.pow(y[i]-f(x[i],a,b),2)/math.pow(Yerr[i],2)
         print("chi2 = ", chi2)
         return chi2
 
@@ -32,20 +32,19 @@ def Chi2(a,b,c):
 
     return chi2
 
-minimizer = Minuit(Chi2, a=1800, b=2.88e-3, c=0)
-minimizer.limits["a"] = (1700,1900)
-minimizer.limits["b"] = (0,0.1)
-minimizer.limits["c"] = (0,500)
+minimizer = Minuit(Chi2, a=0, b=2.88e-3)
+minimizer.limits["a"] = (0,1900)
+minimizer.limits["b"] = (0,1)
 minimizer.migrad()
 a_fit = minimizer.values['a']
 b_fit = minimizer.values['b']
-c_fit = minimizer.values['c']
-print(minimizer) 
 
+print(minimizer) 
+print(b_fit)
 y_fit = np.array([])
 
 for element in x:
-    y_fit = np.append(y_fit,f(element,a_fit,b_fit,c_fit))
+    y_fit = np.append(y_fit,f(element,a_fit,b_fit))
 #print("\n incertitude sur la mesure Y= \n",Yerr)
 
 plt.matplotlib.pyplot.errorbar(x, y, yerr = sigma/Yerr, xerr=None, fmt='r.')

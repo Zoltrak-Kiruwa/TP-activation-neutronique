@@ -39,10 +39,10 @@ for i in range(len(x)):
 Y_ = pure_sig.pure_signal(Y,yb)
 
 
-def f(x,a,b,c):
-    return a*np.exp(-b*x)+c
+def f(x,a,b,k):
+    return a*np.exp(-b*x)
 
-def Chi2(a,b,c,k):
+def Chi2(a,b,k):
     chi2 = 0
     for i in range(int(k),len(x)):
         
@@ -50,7 +50,7 @@ def Chi2(a,b,c,k):
 
     return chi2
 
-def find_best_lambda(a_,b_,c_):
+def find_best_lambda(a_,b_):
 
     list_a = np.array([])
     list_b = np.array([])
@@ -60,41 +60,39 @@ def find_best_lambda(a_,b_,c_):
 
     for i in range(20,60):
         
-        minimizer = Minuit(Chi2,a=a_,b=b_,c=c_,k=i)
+        minimizer = Minuit(Chi2,a=a_,b=b_,k=i)
         minimizer.limits["a"] = (0,1000)
         minimizer.limits["b"] = (0,0.01)
-        minimizer.limits["c"] = (0,0)
         minimizer.fixed["k"] = True
         minimizer.migrad()
         a_fit = minimizer.values['a']
         b_fit = minimizer.values['b']
-        c_fit = minimizer.values['c']
         k_fit = minimizer.values['k']
         list_a = np.append(list_a,a_fit)
         list_b = np.append(list_b,b_fit)
-        list_c = np.append(list_c,c_fit)
+
         list_minimizer = np.append(list_minimizer,minimizer)
 
     arg = np.argmin(list_b)
     print(np.min(list_b))
-    return list_a[arg],list_b[arg],list_c[arg],list_minimizer[arg],arg
+    return list_a[arg],list_b[arg],list_minimizer[arg],arg
 
 
     
-a_fit,b_fit,c_fit,Minimizer,arg = find_best_lambda(a,b,c)    
+a_fit,b_fit,Minimizer,arg = find_best_lambda(a,b)    
 
-print("a = ",a_fit,"b_fit = ",b_fit,"c = ",c_fit,"arg = ",20+arg)
+print("a = ",a_fit,"b_fit = ",b_fit,"arg = ",20+arg)
 y_fit = []
 print(Minimizer)
 
 for element in x:
-    y_fit.append(f(element,a_fit,b_fit,c_fit))
+    y_fit.append(f(element,a_fit,b_fit))
 #print("\n incertitude sur la mesure Y= \n",Yerr)
 
-plt.plot(x,Y_,'r.')
+plt.plot(x,Y_,'r.',label="donnée centré réduit")
+plt.plot(x,y_fit,label="fit du vanadium, "+r" $\lambda$"+" = "+str(b_fit))
 plt.xlabel("temps en secondes")
 plt.ylabel("nombre de coup")
 plt.title("activité du vanadium")
-
-plt.plot(x,y_fit)
+plt.legend(fontsize='5')
 plt.show()
