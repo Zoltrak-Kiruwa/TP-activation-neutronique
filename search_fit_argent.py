@@ -81,7 +81,7 @@ def find_best_lambda(a_,b_,c_,start,finish,endfit):
 
 #fit argent 108
 yl = Y_
-a_fit,b_fit,c_fit,Minimizer,arg = find_best_lambda(a,b,c,20,60,len(x))   
+a_fit,b_fit,c_fit,Minimizer,arg = find_best_lambda(a,b,c,20,30,len(x))   
 
 print("a = ",a_fit,"b_fit = ",b_fit,"c = ",c_fit,"arg = ",20+arg)
 y_fit = np.array([])
@@ -94,8 +94,13 @@ for element in x:
     
 #fit Argent 110
 curve_diff = np.array([])
+res = 0
 for i in range(0,len(x)):
-    curve_diff = np.append(curve_diff,np.abs(Y_[i]-y_fit[i]))
+    res = Y_[i]-y_fit[i] 
+    if res < 0:
+        res = 1
+        curve_diff = np.append(curve_diff,res)
+    curve_diff = np.append(curve_diff,res)                 #une variante possible est de prendre la valeur absolue de la différence, on obtiens les mêmes résultats
     
 yl = curve_diff
 
